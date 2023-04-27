@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 import "./menuLink.scss";
 
 const MenuLink = ({ Icon, text }) => {

@@ -10,7 +10,7 @@ const SignIn = () => {
                     <h2>Sign In</h2>
 
                     <form id="form" className="flex flex-col">
-                        <input type="text" placeholder="username"/>
+                        <input type="text" placeholder="email"/>
                         <input type="password" placeholder="password"/>
 
                         <button className="btn">Sign In</button>
