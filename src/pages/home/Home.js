@@ -5,11 +5,16 @@ import Rightbar from "../../components/rightbar/Rightbar";
 
 import './home.scss'
 
+import axios from "axios";
+
 const Home = () => {
+
+    
     return (
       <div className="home">
         <Navbar />
         <div className="homeContainer">
+          
           <Sidebar/>
           <Feed/>
           <Rightbar/>

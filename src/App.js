@@ -4,9 +4,13 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/home/Home";
 import Profile from './pages/profile/Profile';
 import EditProfile from './pages/editProfile/EditProfile';
+import { useEffect } from "react";
+import axios from "axios";
 
 
 function App() {
+  
+
   return (
     <div className="Applications">
       <BrowserRouter>

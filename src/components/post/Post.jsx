@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect , useState} from "react";
 import "./post.scss";
 import { Users } from "./../../data";
 import { IconButton } from "@mui/material";
 import Picture from '../../assets/prof.jpg'
+import PostLoading from "../Postloading/Postloading";
+import axios from 'axios'
+
 import {
   ChatBubbleOutline,
   MoreVert,
@@ -14,7 +17,8 @@ import {
 import { Link } from "react-router-dom";
 
 const Post = ({ post }) => {
-  console.log(post);
+  
+   
   return (
     <div className="post">
       <div className="postWrapper">
