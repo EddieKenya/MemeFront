@@ -5,15 +5,19 @@ import Share from "../share/Share";
 import "./feed.scss";
 import { useEffect, useState } from "react";
 import PostLoading from "../Postloading/Postloading";
+import useFetch from "../../useFetch";
 
 const Feed = () => {
+  const{data :posts, pending, error} = useFetch('http://localhost:8000/api/meme/')
+
   return (
     <div className="feed">
       <div className="feedWrapper">
         <Share />
-        {Posts.map((p) => (
-          <Post key={p.id} post={p} />
-        ))}
+        {error && <>{error}</>}
+        {pending && <PostLoading/>}
+        {posts && <Post posts={posts}/>}
+        
       </div>
     </div>
   );

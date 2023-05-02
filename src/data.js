@@ -39,7 +39,7 @@ export const Usersonline = [
   {
     id: 1,
     name: "Leanne Graham",
-    username: "Gloria",
+    username: "edwin",
     email: "Sincere@april.biz",
     profilePicture: "/assets/person/friend1.jpg",
   },
