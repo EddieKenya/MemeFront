@@ -3,29 +3,32 @@ import bgImg from '../assets/img1.jpg';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 import { useState } from "react";
-import axiosInstance from "../axios";
+import axiosInstance from "../axiosInstance";
 
 const SignIn = () => {
 
     const [email, Setemail] = useState("");
     const [password, Setpassword] = useState("");
+    const [isPending, setIsPending] = useState(false)
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         axiosInstance
-          .post("token/", {
-            email: email,
-            password: password,
-          })
-          .then((res) => {
-            localStorage.setItem('access_token', res.data.access);
-            localStorage.setItem('refresh_token', res.data.refresh);
-            axiosInstance.defaults.headers['Authorization'] = 
-                'JWT ' + localStorage.getItem('access_token');
-            navigate('/')
-          });
+            .post("token/", {
+                email: email,
+                password: password,
+            })
+            .then((res) => {
+                localStorage.setItem('access_token', res.data.access);
+                localStorage.setItem('refresh_token', res.data.refresh);
+                axiosInstance.defaults.headers['Authorization'] = 
+                    'JWT ' + localStorage.getItem('access_token');
+                navigate('/')
+            });
+            
+     
       };
     return ( 
         <div className="App">
@@ -52,7 +55,8 @@ const SignIn = () => {
                         name="password"
                         />
 
-                        <button type="submit" className="btn">Sign In</button>
+                        {!isPending && <button type="submit" className="btn">Sign In</button>}
+                        {isPending && <button className="btn" disabled >Loading....</button>}
                     </form>
                     <span>Don't have an account? <Link to='/signup'>SignUp</Link> </span>
                 </div>

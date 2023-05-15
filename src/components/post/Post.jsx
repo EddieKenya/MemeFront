@@ -5,6 +5,7 @@ import { IconButton } from "@mui/material";
 import Picture from '../../assets/prof.jpg'
 import PostLoading from "../Postloading/Postloading";
 import axios from 'axios'
+import useFetch from "../../useFetch";
 
 import {
   ChatBubbleOutline,
@@ -17,7 +18,7 @@ import {
 import { Link } from "react-router-dom";
 
 const Post = ({ posts }) => {
-
+  const{data :Users, pending, error} = useFetch('http://localhost:8000/api/users/')
 
    
   return (
@@ -39,7 +40,7 @@ const Post = ({ posts }) => {
                 </Link>
                 <span className="postUsername">
                     {post.user.user_name}
-                  {/* {Users.filter((u) => u.id === post.user)[0].user_name} */}
+                  {Users && Users.filter((u) => u.id === post.user)[0].user_name}
                 </span>
                 <span className="postDate">{post.date_created}</span>
               </div>
@@ -51,7 +52,7 @@ const Post = ({ posts }) => {
             </div>
             <div className="postCenter">
               <span className="postText">{post.bio}</span>
-              <img src={post.posts_image} alt="" className="postImg" />
+              <img src={post.file} alt="" className="postImg" />
             </div>
             <div className="postBottom">
               <div className="postBottomLeft">

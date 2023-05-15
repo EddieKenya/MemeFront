@@ -1,14 +1,13 @@
 import React from "react";
-import { Posts } from "../../data";
 import Post from "../post/Post";
 import Share from "../share/Share";
 import "./feed.scss";
-import { useEffect, useState } from "react";
 import PostLoading from "../Postloading/Postloading";
 import useFetch from "../../useFetch";
 
 const Feed = () => {
   const{data :posts, pending, error} = useFetch('http://localhost:8000/api/meme/')
+  
 
   return (
     <div className="feed">

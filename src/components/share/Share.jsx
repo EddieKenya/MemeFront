@@ -6,9 +6,41 @@ import {
 } from "@mui/icons-material";
 import React, { useState } from "react";
 import "./share.scss";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Share = () => {
+  const [bio, setBio] = useState("");
   const [file, setFile] = useState(null);
+  const [isPosting, setIsPosting] = useState(false);
+
+
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      setIsPosting(true);  
+      const formData = new FormData();
+      formData.append('bio', bio);
+      formData.append('file', file);
+
+    
+  
+      try {
+        await axios.post('http://127.0.0.1:8000/api/upload/', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        // Request successful, do something
+         window.location.reload();
+         setIsPosting(false);
+      } catch (error) {
+        console.log(error.message)
+      }
+
+    
+    
+  };
+
 
   const removeImage = () => {
     setFile(null);
@@ -16,10 +48,10 @@ const Share = () => {
   return (
 
     <div className="share">
-      <form>
-
+      <form action="" onSubmit={handleSubmit}>
         <div className="shareWrapper">
           <div className="shareTop">
+          
             <img
               src="/assets/person/user.jpg"
               alt=""
@@ -27,14 +59,21 @@ const Share = () => {
             />
             <input
               type="text"
-              placeholder="What's on your mind Amber ?"
+              name="bio"
+              placeholder=" Caption your post with a bio..."
               className="shareInput"
+              value={bio}
+              onChange={(e)=> setBio(e.target.value)}
             />
           </div>
           <hr className="shareHr" />
           {file && (
             <div className="shareImgContainer">
               <img src={URL.createObjectURL(file)} alt="" className="shareImg" />
+              <button type="submit" onClick={handleSubmit} disabled={isPosting}>
+                {isPosting ? 'Posting Data...' : 'Post Data'}
+              </button>
+              
               <Close className="shareCancelImg" onClick={removeImage} />
             </div>
           )}
@@ -45,6 +84,7 @@ const Share = () => {
                 <span className="shareOptionText">Photo/Video</span>
                 <input
                   type="file"
+                  name="file"
                   id="file"
                   accept=".png,.jpeg,.jpg"
                   style={{ display: "none" }}
@@ -55,7 +95,7 @@ const Share = () => {
             </div>
           </div>
         </div>
-      </form>
+      </form>   
     </div>
   );
 };

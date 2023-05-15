@@ -13,9 +13,15 @@ import MenuLink from "../menuLink/MenuLink";
 import Friends from "../friends/Friends";
 import { Users } from "../../data";
 import { DarkModeContext } from "./../../context/darkModeContext";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
+  const  LinkStyle = {
+    margin : "1rem",
+    textDecoration: "none",
+    color: 'blue'
+  }
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -29,7 +35,11 @@ const Sidebar = () => {
         <span onClick={() => dispatch({ type: "TOGGLE" })}>
           <MenuLink Icon={<Brightness4Icon />} text="Theme" />
         </span>
-        <MenuLink Icon={<ExitToAppOutlinedIcon />} text="Logout" />
+        <Link
+         to="/logout"
+         style={LinkStyle}>
+          <MenuLink Icon={<ExitToAppOutlinedIcon />} text="Logout" />
+        </Link>
 
         
       </div>

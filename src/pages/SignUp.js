@@ -1,5 +1,4 @@
 import React from "react";
-import axiosInstance from "../axios";
 import { useNavigate } from "react-router-dom";
 import bgImg from '../assets/img1.jpg'
 import { Link } from "react-router-dom";
@@ -7,26 +6,29 @@ import '../styles/log.css'
 import { useState } from "react";
 
 const SignUp = () => {
-    const [username, Setusername] = useState("");
+    const [user_name, Setusername] = useState("");
     const [email, Setemail] = useState("");
     const [password, Setpassword] = useState("");
+    const [isPending, setIsPending] = useState(false)
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+     const postuser = { email, user_name, password}
+     
+     fetch('http://127.0.0.1:8000/api/register/', {
+        method: 'POST',
+        headers: {"Content-Type": "application/json" },
+        body: JSON.stringify(postuser)
+     }). then(()=>{
+        console.log('new user created')
+        setIsPending(false)
+        navigate('/signin')
+     })
     
-        axiosInstance
-          .post("register/", {
-            email: email,
-            user_name: username ,       
-            password: password,
-          })
-          .then((res) => {
-            console.log(res);
-            console.log(res.data)
-            navigate('/')
-          });
-      };
+   
+      }
     return ( 
         <div className="App">
             <div className="register">
@@ -39,15 +41,17 @@ const SignUp = () => {
                         value={email}
                         onChange={(e) => Setemail(e.target.value)}
                         type="email"
+                        required
                         placeholder="Youremail@gmail.com"
                         id="email"
                         name="email"
                         />
 
                         <input 
-                        value={username}
+                        value={user_name}
                         onChange={(e) => Setusername(e.target.value)}
-                        type="text" 
+                        type="text"
+                        required 
                         placeholder="username"
                         id="username"
                         name="user_name"
@@ -56,13 +60,15 @@ const SignUp = () => {
                         <input 
                         value={password}
                         onChange={(e) => Setpassword(e.target.value)}
-                        type="password" 
+                        type="password"
+                        required 
                         placeholder="password"
                         id="password"
                         name="password"
                         />
 
-                        <button className="btn" type="submit" >Sign UP</button>
+                       {!isPending && <button className="btn" onClick={handleSubmit} >Sign UP</button>}
+                       {isPending && <button className="btn" disabled >Creating User....</button>}
                     </form>
                     <span>Already have an account? <Link to='/signin'>SignIn</Link> </span>
                 </div>

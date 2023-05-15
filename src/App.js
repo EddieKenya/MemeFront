@@ -6,7 +6,7 @@ import Profile from './pages/profile/Profile';
 import EditProfile from './pages/editProfile/EditProfile';
 import { useEffect } from "react";
 import axios from "axios";
-
+import LogOut from "./pages/logout";
 
 function App() {
   
@@ -16,6 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/">
+            <Route path="logout" element={<LogOut/>}/>
             <Route path="signin" element={<SignIn/>}/>
             <Route path="signup" element={<SignUp/>}/>
             <Route index element={<Home/>} />
