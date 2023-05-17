@@ -9,11 +9,12 @@ const SignIn = () => {
 
     const [email, Setemail] = useState("");
     const [password, Setpassword] = useState("");
-    const [isPending, setIsPending] = useState(false)
+    const [isPosting, setIsPosting] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsPosting(true);
 
         axiosInstance
             .post("token/", {
@@ -25,6 +26,7 @@ const SignIn = () => {
                 localStorage.setItem('refresh_token', res.data.refresh);
                 axiosInstance.defaults.headers['Authorization'] = 
                     'JWT ' + localStorage.getItem('access_token');
+                setIsPosting(false);
                 navigate('/')
             });
             
@@ -53,10 +55,11 @@ const SignIn = () => {
                         placeholder="password"
                         id="password" 
                         name="password"
-                        />
+                        /> 
+                         <button type="submit" className="btn" onClick={handleSubmit} disabled={isPosting}>
+                            {isPosting ? 'Loading...' : 'SignIn'}
+                         </button>
 
-                        {!isPending && <button type="submit" className="btn">Sign In</button>}
-                        {isPending && <button className="btn" disabled >Loading....</button>}
                     </form>
                     <span>Don't have an account? <Link to='/signup'>SignUp</Link> </span>
                 </div>

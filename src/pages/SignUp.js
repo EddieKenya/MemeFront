@@ -9,11 +9,12 @@ const SignUp = () => {
     const [user_name, Setusername] = useState("");
     const [email, Setemail] = useState("");
     const [password, Setpassword] = useState("");
-    const [isPending, setIsPending] = useState(false)
+    const [isPosting, setIsPosting] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsPosting(true);
 
      const postuser = { email, user_name, password}
      
@@ -23,7 +24,7 @@ const SignUp = () => {
         body: JSON.stringify(postuser)
      }). then(()=>{
         console.log('new user created')
-        setIsPending(false)
+        setIsPosting(false);
         navigate('/signin')
      })
     
@@ -67,8 +68,9 @@ const SignUp = () => {
                         name="password"
                         />
 
-                       {!isPending && <button className="btn" onClick={handleSubmit} >Sign UP</button>}
-                       {isPending && <button className="btn" disabled >Creating User....</button>}
+                       <button type="submit" className="btn" onClick={handleSubmit} disabled={isPosting}>
+                            {isPosting ? 'Loading...' : 'SignUp'}
+                        </button>
                     </form>
                     <span>Already have an account? <Link to='/signin'>SignIn</Link> </span>
                 </div>

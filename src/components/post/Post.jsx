@@ -1,10 +1,7 @@
 import React, { useEffect , useState} from "react";
 import "./post.scss";
-import { Users } from "./../../data";
 import { IconButton } from "@mui/material";
-import Picture from '../../assets/prof.jpg'
-import PostLoading from "../Postloading/Postloading";
-import axios from 'axios'
+import Picture from '../../assets/prof.jpg';
 import useFetch from "../../useFetch";
 
 import {
@@ -18,7 +15,7 @@ import {
 import { Link } from "react-router-dom";
 
 const Post = ({ posts }) => {
-  const{data :Users, pending, error} = useFetch('http://localhost:8000/api/users/')
+  const{data :Users} = useFetch('http://localhost:8000/api/users/')
 
    
   return (
@@ -39,7 +36,6 @@ const Post = ({ posts }) => {
                   />
                 </Link>
                 <span className="postUsername">
-                    {post.user.user_name}
                   {Users && Users.filter((u) => u.id === post.user)[0].user_name}
                 </span>
                 <span className="postDate">{post.date_created}</span>

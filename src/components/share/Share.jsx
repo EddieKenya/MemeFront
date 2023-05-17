@@ -6,7 +6,6 @@ import {
 } from "@mui/icons-material";
 import React, { useState } from "react";
 import "./share.scss";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Share = () => {
