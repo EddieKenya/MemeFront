@@ -8,6 +8,8 @@ import React, { useState } from "react";
 import "./share.scss";
 import axios from "axios";
 
+
+
 const Share = () => {
   const [bio, setBio] = useState("");
   const [file, setFile] = useState(null);
