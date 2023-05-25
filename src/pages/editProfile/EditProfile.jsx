@@ -5,8 +5,13 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import "./editProfile.scss";
 import Profile from "../../assets/prof.jpg";
 import WallPaper from "../../assets/premier.png";
+import { useEffect } from "react";
 
 const EditProfile = () => {
+
+  
+
+
   return (
     <div className="editProfile">
       <Navbar />
@@ -27,8 +32,8 @@ const EditProfile = () => {
               />
             </div>
             <div className="profileInfo">
-              <h4 className="profileInfoName">Amber Logan</h4>
-              <span className="profileInfoDesc">Hi Friends!</span>
+              <h4 className="profileInfoName"> Edwin Makhanu</h4>
+              <span className="profileInfoDesc">Admin</span>
             </div>
           </div>
           <div className="editprofileRightBottom">

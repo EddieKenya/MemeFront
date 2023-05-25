@@ -16,22 +16,25 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbarCenter">
-        <div className="searchBar">
+        {/* <div className="searchBar">
           <SearchIcon className="searchIcon" />
           <input
             type="text"
             placeholder="Search for friends post or video"
             className="searchInput"
           />
-        </div>
+        </div> */}
       </div>
       <div className="navbarRight">
+        <Link to="/">
+
         <div className="navbarLinks">
           <span className="navbarLink">Homepage</span>
-          <span className="navbarLink">Timeline</span>
+          {/* <span className="navbarLink">Timeline</span> */}
         </div>
+        </Link>
         <div className="navbarIcons">
-          <div className="navbarIconItem">
+          {/* <div className="navbarIconItem">
             <PersonIcon />
             <span className="navbarIconBadge">2</span>
           </div>
@@ -42,7 +45,7 @@ const Navbar = () => {
           <div className="navbarIconItem">
             <NotificationsIcon />
             <span className="navbarIconBadge">8</span>
-          </div>
+          </div> */}
         </div>
         <Link to="/profile/userId">
           <img src={Profile} alt="" className="navbarImg" />

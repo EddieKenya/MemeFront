@@ -22,13 +22,21 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
-        <MenuLink Icon={<RssFeedIcon />} text="Feed" />
+        {/* <MenuLink Icon={<RssFeedIcon />} text="Feed" />
         <MenuLink Icon={<ChatIcon />} text="Chats" />
         <MenuLink Icon={<VideocamIcon />} text="Videos" />
         <MenuLink Icon={<GroupsIcon />} text="Friends" />
         <MenuLink Icon={<BookmarkIcon />} text="Bookmarks" />
-        <MenuLink Icon={<ShoppingCartIcon />} text="Marketplace" />
-        <MenuLink Icon={<EventIcon />} text="Events" />
+        <MenuLink Icon={<ShoppingCartIcon />} text="Marketplace" /> */}
+  
+
+        
+        <Link
+         to="/bio"
+         style={LinkStyle}>
+          <MenuLink Icon={<EventIcon />} text="About App (developement)" />
+        </Link>
+       
         <Link
          to="/logout"
          style={LinkStyle}>

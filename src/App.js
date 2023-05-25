@@ -6,7 +6,7 @@ import Profile from './pages/profile/Profile';
 import EditProfile from './pages/editProfile/EditProfile';
 import PrivateRoutes from "./pages/Privateroute/PrivateRoute";
 import LogOut from "./pages/logout";
-
+import About from "./pages/about/about";
 function App() {
   
 
@@ -19,7 +19,8 @@ function App() {
             <Route path="signup" element={<SignUp/>}/>
             <Route element={<PrivateRoutes/>}>
               <Route index element={<Home/>} />
-              <Route path="profile">
+              <Route path="bio" element={<About/>}/>
+              <Route path="profile" >
                 <Route path=":userId" element={<Profile />} />
                 <Route path=":userId/edit" element={<EditProfile />} />
               </Route>

@@ -1,0 +1,23 @@
+.documentpage{
+    background-color: #f1f1f1;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    
+    
+}
+
+.content{
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1{
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}

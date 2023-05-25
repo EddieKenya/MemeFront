@@ -28,8 +28,8 @@ const Profile = () => {
               />
             </div>
             <div className="profileInfo">
-              <h4 className="profileInfoName">Amber Logan</h4>
-              <span className="profileInfoDesc">Hi Friends!</span>
+              <h4 className="profileInfoName">Edwin Makhanu (FullStack Developer)</h4>
+              <span className="profileInfoDesc">Admin</span>
             </div>
           </div>
           <div className="profileRightBottom">

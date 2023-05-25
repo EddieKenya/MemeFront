@@ -7,6 +7,8 @@ import {
 import React, { useState } from "react";
 import "./share.scss";
 import axios from "axios";
+import bgImg from '../../assets/img1.jpg'
+
 
 
 
@@ -14,6 +16,7 @@ const Share = () => {
   const [bio, setBio] = useState("");
   const [file, setFile] = useState(null);
   const [isPosting, setIsPosting] = useState(false);
+ 
 
 
   const handleSubmit = async (e) => {
@@ -49,12 +52,13 @@ const Share = () => {
   return (
 
     <div className="share">
+
       <form action="" onSubmit={handleSubmit}>
         <div className="shareWrapper">
           <div className="shareTop">
           
             <img
-              src="/assets/person/user.jpg"
+              src={bgImg}
               alt=""
               className="shareProfileImg"
             />

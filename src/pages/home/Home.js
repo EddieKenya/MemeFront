@@ -2,10 +2,9 @@ import Navbar from "../../components/navbar/Navbar";
 import Sidebar from '../../components/sidebar/Sidebar';
 import Feed from '../../components/feed/Feed';
 import Rightbar from "../../components/rightbar/Rightbar";
+import { useState, useEffect } from "react";
 
 import './home.scss'
-import jwt_decode from "jwt-decode"
- 
 
 const Home = () => {
   
