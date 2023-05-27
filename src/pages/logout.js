@@ -7,7 +7,7 @@ const LogOut = () => {
     const navigate = useNavigate('/');
 
     useEffect(() => {
-        const response = axiosInstance.post('/logout/', {
+        const response = axiosInstance.post('logout/', {
             refresh_token: localStorage.getItem('refresh_token'),
         });
         localStorage.removeItem('access_token');

@@ -18,7 +18,7 @@ const SignUp = () => {
 
      const postuser = { email, user_name, password}
      
-     fetch('http://127.0.0.1:8000/api/register/', {
+     fetch('https://web-production-d6b5.up.railway.app/api/register/', {
         method: 'POST',
         headers: {"Content-Type": "application/json" },
         body: JSON.stringify(postuser)

@@ -6,7 +6,7 @@ import PostLoading from "../Postloading/Postloading";
 import useFetch from "../../useFetch";
 
 const Feed = () => {
-  const{data :posts, pending, error} = useFetch('http://localhost:8000/api/meme/')
+  const{data :posts, pending, error} = useFetch('https://web-production-d6b5.up.railway.app/api/meme/')
   
 
   return (
