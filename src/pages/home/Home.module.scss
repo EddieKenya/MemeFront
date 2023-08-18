@@ -1,0 +1,42 @@
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: black;
+}
+
+.table-input {
+  width: 30%;
+  border: 1px solid burlywood;
+  outline: none;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  margin-right: 50px;
+
+
+  &:focus-within {
+    box-shadow: 0px 0px 7px rgba(68, 64, 64, 0.7);
+  }
+}
+
+button {
+  cursor: pointer;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+table {
+  margin: 20px 10%;
+  width: 80%;
+
+  th {
+    padding: 10px;
+  }
+}
+
+// Add any additional styles specific to the 'Table' component or other elements in this SCSS file
+// ...

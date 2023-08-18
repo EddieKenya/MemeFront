@@ -1,85 +1,134 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import bgImg from '../assets/img1.jpg'
-import { Link } from "react-router-dom";
-import '../styles/log.css'
-import { useState } from "react";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../axiosInstance';
+import bgImg from '../assets/oil.jpeg';
+import '../styles/log.css';
 
 const SignUp = () => {
-    const [user_name, Setusername] = useState("");
-    const [email, Setemail] = useState("");
-    const [password, Setpassword] = useState("");
-    const [isPosting, setIsPosting] = useState(false);
-    const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [password, setPassword] = useState('');
+  const [isPosting, setIsPosting] = useState(false);
+  const [errorMessages, setErrorMessages] = useState({});
+  const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setIsPosting(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsPosting(true);
+    setErrorMessages({});
 
-     const postuser = { email, user_name, password}
-     
-     fetch('https://web-production-d6b5.up.railway.app/api/register/', {
-        method: 'POST',
-        headers: {"Content-Type": "application/json" },
-        body: JSON.stringify(postuser)
-     }). then(()=>{
-        console.log('new user created')
+    axiosInstance
+      .post('users/register/', {
+        email: email,
+        username: username,
+        first_name: firstName,
+        last_name: lastName,
+        password: password,
+      })
+      .then((res) => {
+        if (Object.keys(errorMessages).length === 0) {
+          navigate('/');
+          
+        }
+      })
+      .catch((error) => {
+        if (error.response && error.response.data) {
+          setErrorMessages(error.response.data);
+          
+        } else {
+          setErrorMessages({ network: 'Site cannot be reached. Please try again later.' });
+        }
         setIsPosting(false);
-        navigate('/signin')
-     })
-    
-   
-      }
-    return ( 
-        <div className="App">
-            <div className="register">
-                <div className="col-1">
-                    <h2>Sign Up</h2>
-                    <span>Register and make sure to laugh..</span>
+      });
+  };
 
-                    <form id="form" action="" onSubmit={handleSubmit}   className="flex flex-col">
-                        <input 
-                        value={email}
-                        onChange={(e) => Setemail(e.target.value)}
-                        type="email"
-                        required
-                        placeholder="Youremail@gmail.com"
-                        id="email"
-                        name="email"
-                        />
+  return (
+    <div className="App">
+      <div className="register">
+        <div className="col-1">
+          <h2>Sign Up</h2>
+          <form onSubmit={handleSubmit} className="flex flex-col">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              id="email"
+              name="email"
+            />
+            {errorMessages.email && (
+              <p className="error_msg">{errorMessages.email}</p>
+            )}
 
-                        <input 
-                        value={user_name}
-                        onChange={(e) => Setusername(e.target.value)}
-                        type="text"
-                        required 
-                        placeholder="username"
-                        id="username"
-                        name="user_name"
-                        />
- 
-                        <input 
-                        value={password}
-                        onChange={(e) => Setpassword(e.target.value)}
-                        type="password"
-                        required 
-                        placeholder="password"
-                        id="password"
-                        name="password"
-                        />
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              id="username"
+              name="username"
+            />
+            {errorMessages.username && (
+              <p className="error_msg">{errorMessages.username}</p>
+            )}
 
-                       <button type="submit" className="btn" onClick={handleSubmit} disabled={isPosting}>
-                            {isPosting ? 'Loading...' : 'SignUp'}
-                        </button>
-                    </form>
-                    <span>Already have an account? <Link to='/signin'>SignIn</Link> </span>
-                </div>
-                <div className="col-2">
-                    <img src={bgImg}/>
-                </div>
-            </div>
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              id="first_name"
+              name="first_name"
+            />
+            {errorMessages.first_name && (
+              <p className="error_msg">{errorMessages.first_name}</p>
+            )}
+
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              id="last_name"
+              name="last_name"
+            />
+            {errorMessages.last_name && (
+              <p className="error_msg">{errorMessages.last_name}</p>
+            )}
+
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              id="password"
+              name="password"
+            />
+            {errorMessages.password && (
+              <p className="error_msg">{errorMessages.password}</p>
+            )}
+
+            <button
+              type="submit"
+              className="btn"
+              onClick={handleSubmit}
+              disabled={isPosting}
+            >
+              {isPosting ? 'Loading...' : 'Sign Up'}
+            </button>
+          </form>
+          {errorMessages.network && (
+            <p className="error_msg">{errorMessages.network}</p>
+          )}
         </div>
-     );
-}
- 
+        <div className="col-2">
+          <img src={bgImg} alt="Background" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default SignUp;
