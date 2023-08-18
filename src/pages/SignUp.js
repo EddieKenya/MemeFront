@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosInstance';
 import bgImg from '../assets/oil.jpeg';
 import '../styles/log.css';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -118,6 +119,7 @@ const SignUp = () => {
             >
               {isPosting ? 'Loading...' : 'Sign Up'}
             </button>
+            <p className='accpresent'>I have an Account <Link to="/signin">SignIn</Link></p>
           </form>
           {errorMessages.network && (
             <p className="error_msg">{errorMessages.network}</p>
