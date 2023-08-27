@@ -3,7 +3,6 @@ import "./post.scss";
 import { IconButton } from "@mui/material";
 import Picture from '../../assets/prof.jpg';
 import useFetch from "../../useFetch";
-import jwt_decode from "jwt-decode"
 import jpg from "../../assets/img1.jpg"
 
 import {
@@ -53,7 +52,7 @@ const Post = ({ posts }) => {
             </div>
             <div className="postCenter">
               <span className="postText">{post.bio}</span>
-              <img src={post.file} alt="" className="postImg" />
+              <img src={post. pics} alt="" className="postImg" />
             </div>
             <div className="postBottom">
               {/* <div className="postBottomLeft">

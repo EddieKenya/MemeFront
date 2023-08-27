@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosInstance';
 import bgImg from '../assets/oil.jpeg';
 import '../styles/log.css';
 import { Link } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -12,29 +13,53 @@ const SignIn = () => {
   const [errorMessages, setErrorMessages] = useState({});
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const refreshAccessToken = async () => {
+      try {
+        const refreshToken = localStorage.getItem('refreshToken');
+        if (refreshToken) {
+          const response = await axiosInstance.post('api/token/refresh/', {
+            refresh: refreshToken,
+          });
+          if (response.data.access) {
+            localStorage.setItem('accessToken', response.data.access);
+          }
+        }
+      } catch (error) {
+        // Handle error
+      }
+    };
+
+    // Refresh every 30 minutes (1800000 milliseconds)
+    const intervalId = setInterval(refreshAccessToken, 1800000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsPosting(true);
     setErrorMessages({});
 
-    axiosInstance
-      .post('api/token/', {  // Use the correct endpoint to obtain tokens
+    try {
+      const response = await axiosInstance.post('api/token/', {
         email: email,
         password: password,
-      })
-      .then((res) => {
-        if (res.data.access) { // Check if access token is present in the response
-          navigate('/'); // Redirect to home page
-        }
-      })
-      .catch((error) => {
-        if (error.response && error.response.data) {
-          setErrorMessages(error.response.data);
-        } else {
-          setErrorMessages({ network: 'Site cannot be reached. Please try again later.' });
-        }
-        setIsPosting(false);
       });
+
+      if (response.data.access && response.data.refresh) {
+        localStorage.setItem('accessToken', response.data.access);
+        localStorage.setItem('refreshToken', response.data.refresh);
+        navigate('/'); // Redirect to home page
+      }
+    } catch (error) {
+      if (error.response && error.response.data) {
+        setErrorMessages(error.response.data);
+      } else {
+        setErrorMessages({ network: 'Site cannot be reached. Please try again later.' });
+      }
+    } finally {
+      setIsPosting(false);
+    }
   };
 
   return (
@@ -90,4 +115,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-
